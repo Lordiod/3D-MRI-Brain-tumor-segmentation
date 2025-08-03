@@ -177,7 +177,66 @@ Training the U-Net model requires significant computational resources. A GPU set
 
 ### Setting Up GPU Environment
 
-#### Option 1: Using Conda (Recommended)
+#### Option 1: Manual CUDA & cuDNN Installation (Windows)
+
+**🔹 1. Uninstall Any Existing CUDA & cuDNN**
+
+First, clean your environment to avoid conflicts:
+- Open **Control Panel > Programs > Programs and Features**
+- Uninstall **NVIDIA CUDA Toolkit**
+- Uninstall any **cuDNN**, if manually installed before
+
+**🔹 2. Install CUDA Toolkit 11.2**
+
+Official NVIDIA download page: https://developer.nvidia.com/cuda-11.2.2-download-archive
+
+Choose:
+- **Operating System**: Windows
+- **Architecture**: x86_64
+- **Version**: Windows 10
+- **Installer Type**: exe (local)
+
+Download and install the toolkit.
+
+🔧 **Make sure to add CUDA to your system's environment variables. The installer usually does this for you.**
+
+**🔹 3. Install cuDNN 8.1 for CUDA 11.2**
+
+⚠️ **You need an NVIDIA developer account to download cuDNN**
+
+1. Go to: https://developer.nvidia.com/rdp/cudnn-archive
+2. Look for: **cuDNN v8.1.1 (February 26th, 2021), for CUDA 11.2**
+3. Download the cuDNN for Windows zip file
+
+After download:
+1. Extract the zip file
+2. Copy the contents to your CUDA directory:
+   - Copy `bin/*` → `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\bin`
+   - Copy `include/*` → `...\CUDA\v11.2\include`
+   - Copy `lib/*` → `...\CUDA\v11.2\lib\x64`
+
+🔒 **When asked to replace files, click Yes.**
+
+**🔹 4. Add Environment Variables (if not already set)**
+
+Open **System Properties > Environment Variables**, then add to System variables:
+
+- **CUDA_HOME** or **CUDA_PATH** → `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2`
+
+Append to **Path**:
+- `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\bin`
+- `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\libnvvp`
+
+**🔹 5. Install TensorFlow Compatible Version**
+
+Now install a version of TensorFlow that works with CUDA 11.2 + cuDNN 8.1:
+
+```bash
+pip install tensorflow==2.7.0
+```
+
+#### Option 2: Using Conda (Alternative)
+
 ```bash
 # Create a new conda environment
 conda create -n brain-tumor-gpu python=3.9
@@ -196,7 +255,8 @@ pip install -r requirements.txt
 python -c "import tensorflow as tf; print('GPU Available:', tf.config.list_physical_devices('GPU'))"
 ```
 
-#### Option 2: Using pip with system CUDA
+#### Option 3: Using pip with system CUDA
+
 ```bash
 # Create virtual environment
 python -m venv tf-gpu-env
