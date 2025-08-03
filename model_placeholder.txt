@@ -1,0 +1,55 @@
+# Model Files
+
+This directory should contain the trained model file `model_x1_1.h5`.
+
+## Download Instructions
+
+Due to file size limitations, the trained model is not included in this repository. 
+
+To use this application, you need to:
+
+1. **Train your own U-Net model** using the provided notebook in `building the model/`
+   - Download the BraTS2020 dataset: https://www.kaggle.com/datasets/awsaf49/brats20-dataset-training-validation
+   - Set up GPU environment (see README.md GPU Setup section)
+   - Follow the training notebook step-by-step
+   - Training time: 24-48 hours on modern GPU
+
+2. **Or download a pre-trained model** compatible with this application
+3. **Place the model file** as `model_x1_1.h5` in the root directory of this project
+
+## Dataset Information
+
+**BraTS2020 Dataset**:
+- **Source**: https://www.kaggle.com/datasets/awsaf49/brats20-dataset-training-validation
+- **Size**: ~4GB compressed, ~40GB extracted
+- **Content**: 369 training cases with 4 MRI sequences each
+- **Sequences**: T1, T1CE, T2, FLAIR + ground truth segmentations
+- **Format**: NIfTI (.nii.gz) files
+- **Resolution**: 240×240×155 voxels
+
+**Usage**:
+- Extract to `Data/BraTS2020_TrainingData/` directory
+- The training notebook will automatically process the data
+- Preprocessing includes normalization, cropping, and augmentation
+
+## System Requirements for Training
+
+- **TensorFlow**: 2.10.0
+- **CUDA**: 11.2
+- **cuDNN**: 8.1
+- **GPU**: NVIDIA with 8GB+ VRAM recommended
+
+## Model Requirements
+
+The model should be a TensorFlow/Keras model (.h5 format) that:
+- Takes two input channels (FLAIR and T1CE MRI sequences)
+- Outputs 4-class segmentation predictions
+- Is trained on 64x64 pixel images
+- Processes 50 consecutive slices starting from slice 22
+
+## Model Architecture
+
+The expected model architecture is a U-Net for 3D brain tumor segmentation with:
+- Input shape: (batch_size, 50, 64, 64, 2)
+- Output shape: (batch_size, 50, 64, 64, 4)
+- Classes: Background, Necrotic/Core, Edema, Enhancing tumor
