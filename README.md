@@ -14,6 +14,7 @@ A modern GUI application for 3D MRI brain tumor segmentation using a U-Net deep 
 
 - [Features](#features)
 - [Model Architecture](#model-architecture)
+- [NIfTI MRI Modalities Explained](#nifti-mri-modalities-explained)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -45,6 +46,40 @@ The application employs a **3D U-Net**, a state-of-the-art deep convolutional ne
 - **Output**: 4-class segmentation mask (Background, Necrotic/Core, Edema, Enhancing).
 - **Training Data**: The model was trained on the [BraTS 2020 dataset](https://www.kaggle.com/datasets/awsaf49/brats20-dataset-training-validation).
 - **Preprocessing**: Input images are automatically resized and normalized before being fed to the model.
+
+## NIfTI MRI Modalities Explained
+
+MRI brain tumor datasets typically include several types of 3D NIfTI files, each capturing different tissue contrasts and tumor characteristics. The main modalities are:
+
+- **T1**: Standard anatomical scan, useful for general brain structure.
+- **T1CE**: T1-weighted with contrast enhancement (Gadolinium), highlights active tumor regions.
+- **T2**: Sensitive to fluid content, helps visualize edema and tumor boundaries.
+- **FLAIR**: Suppresses fluid signals, making lesions and edema more visible.
+- **Segmentation**: Ground truth mask labeling tumor subregions (multi-class).
+
+These modalities are stored as `.nii` or `.nii.gz` files, each representing a 3D volume.
+
+**Visualization Example:**
+
+Below are sample slices from each modality and their overlay:
+
+<p align="center">
+  <img src="public/grayscale_modalities_overlay.png" alt="MRI Modalities Overlay" width="600"/>
+</p>
+
+Animated comparison:
+
+<p align="center">
+  <img src="public/grayscale_modalities.gif" alt="MRI Modalities Animation" width="600"/>
+</p>
+
+Combined segmentation example for a single patient:
+
+<p align="center">
+  <img src="public/BraTS_patient_001_combined.png" alt="BraTS Patient Combined Segmentation" width="600"/>
+</p>
+
+These visualizations help understand how each modality contributes to tumor detection and segmentation.
 
 ## Getting Started
 
@@ -80,7 +115,7 @@ The application employs a **3D U-Net**, a state-of-the-art deep convolutional ne
     ```
 
 4.  **Download a Pre-trained Model:**
-    A trained model is required to run the application. Place a compatible pre-trained Keras model file named `brain_tumor_model.h5` in the `models/` directory.
+    A trained model is required to run the application. Place a compatible pre-trained Keras model file named `model_x1_1.h5`.
     *(Note: A placeholder file `model_placeholder.txt` is provided with instructions on where to acquire a model if one is not included).)*
 
 ## Usage
