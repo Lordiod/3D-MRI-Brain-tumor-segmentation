@@ -36,6 +36,11 @@ A modern GUI application for 3D MRI brain tumor segmentation using a U-Net deep 
   - **Edema**: Peritumoral edema (Yellow)
   - **Enhancing Tumor**: Gadolinium-enhancing tumor (Green)
 - **Modern & Clean UI**: A user-friendly, dark-themed interface built with CustomTkinter.
+
+<p align="center">
+  <img src="public/gui.png" alt="Main App Window" width="600"/>
+</p>
+
 - **Modular & Extensible**: Well-organized codebase for easy maintenance and future development.
 
 ## Model Architecture
@@ -133,6 +138,10 @@ These visualizations help understand how each modality contributes to tumor dete
 3.  **Generate Segmentation:**
     - After loading both images, click **"Predict Segmentation"**.
     - The model will process the data, and the segmentation results will appear in the display panels. Processing time may vary based on your hardware.
+
+<p align="center">
+  <img src="public/app.gif" alt="Prediction Result" width="600"/>
+</p>
 
 4.  **Explore the Results:**
     - Use the **slice slider** at the bottom to navigate through the axial slices of the 3D MRI volume.
