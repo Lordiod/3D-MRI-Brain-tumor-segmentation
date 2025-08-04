@@ -159,7 +159,6 @@ Thumbs.db
 # Custom ignore patterns
 building the model/tf-gpu/
 building the model/*.log
-*.gif
 *.nii
 *.nii.gz
 
