@@ -8,7 +8,7 @@
 
 A modern GUI application built with CustomTkinter that uses a trained U-Net deep learning model to perform automated brain tumor segmentation on NIfTI MRI data. This tool provides medical professionals and researchers with an intuitive interface for analyzing brain tumor patterns in 3D MRI scans.
 
-![3D MRI Brain Tumor Segmentation GUI](pics/app.gif)
+![3D MRI Brain Tumor Segmentation GUI](public/app.gif)
 
 ## ✨ Features
 
