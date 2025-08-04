@@ -7,7 +7,7 @@ import cv2
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.colors import ListedColormap
-import tkinter as tk
+import customtkinter as ctk
 
 from utils.config import AppConfig
 
@@ -27,16 +27,19 @@ class VisualizationWindow:
         self.threshold_var = None
         self.slice_scale = None
         self.threshold_scale = None
+        
+        # Value display labels
+        self.slice_value_label = None
+        self.threshold_value_label = None
     
     def create_window(self):
         """Create the visualization window."""
         if self.window is not None:
             self.window.destroy()
         
-        self.window = tk.Toplevel(self.app.root)
+        self.window = ctk.CTkToplevel(self.app.root)
         self.window.title("Brain Tumor Segmentation Results")
         self.window.geometry(f"{AppConfig.VISUALIZATION_WIDTH}x{AppConfig.VISUALIZATION_HEIGHT}")
-        self.window.configure(bg='#2b2b2b')
         
         # Ensure window is brought to front
         self.window.attributes('-topmost', True)
@@ -70,52 +73,75 @@ class VisualizationWindow:
     
     def _create_controls(self):
         """Create control widgets for slice and threshold adjustment."""
-        control_frame = tk.Frame(self.window, bg='#2b2b2b')
+        control_frame = ctk.CTkFrame(self.window)
         control_frame.pack(fill='x', padx=10, pady=5)
         
         # Slice control
-        tk.Label(control_frame, text="Slice:", bg='#2b2b2b', fg='white').pack(side='left', padx=5)
+        slice_container = ctk.CTkFrame(control_frame, fg_color="transparent")
+        slice_container.pack(side='left', fill='x', expand=True, padx=(0, 10))
         
-        self.slice_var = tk.IntVar(value=self.app.current_slice)
-        self.slice_scale = tk.Scale(
-            control_frame,
+        ctk.CTkLabel(slice_container, text="Slice:").pack(side='left', padx=5)
+        
+        self.slice_var = ctk.IntVar(value=self.app.current_slice)
+        self.slice_scale = ctk.CTkSlider(
+            slice_container,
             from_=0,
             to=AppConfig.VOLUME_SLICES-1,
-            orient='horizontal',
             variable=self.slice_var,
             command=self.update_slice,
-            bg='#2b2b2b',
-            fg='white',
-            highlightbackground='#2b2b2b'
+            orientation='horizontal'
         )
         self.slice_scale.pack(side='left', fill='x', expand=True, padx=5)
         
-        # Threshold control
-        tk.Label(control_frame, text="Threshold:", bg='#2b2b2b', fg='white').pack(side='left', padx=5)
+        # Slice value label
+        self.slice_value_label = ctk.CTkLabel(
+            slice_container, 
+            text=f"{self.app.current_slice}",
+            width=40
+        )
+        self.slice_value_label.pack(side='left', padx=5)
         
-        self.threshold_var = tk.DoubleVar(value=self.app.threshold)
-        self.threshold_scale = tk.Scale(
-            control_frame,
+        # Threshold control
+        threshold_container = ctk.CTkFrame(control_frame, fg_color="transparent")
+        threshold_container.pack(side='right', fill='x', expand=True, padx=(10, 0))
+        
+        ctk.CTkLabel(threshold_container, text="Threshold:").pack(side='left', padx=5)
+        
+        self.threshold_var = ctk.DoubleVar(value=self.app.threshold)
+        self.threshold_scale = ctk.CTkSlider(
+            threshold_container,
             from_=0.1,
             to=0.9,
-            resolution=0.01,
-            orient='horizontal',
             variable=self.threshold_var,
             command=self.update_threshold,
-            bg='#2b2b2b',
-            fg='white',
-            highlightbackground='#2b2b2b'
+            orientation='horizontal'
         )
         self.threshold_scale.pack(side='left', fill='x', expand=True, padx=5)
+        
+        # Threshold value label
+        self.threshold_value_label = ctk.CTkLabel(
+            threshold_container, 
+            text=f"{self.app.threshold:.2f}",
+            width=40
+        )
+        self.threshold_value_label.pack(side='left', padx=5)
     
     def update_slice(self, value):
         """Update the current slice."""
         self.app.current_slice = int(value)
+        self.slice_var.set(int(value))
+        # Update the slice value label
+        if self.slice_value_label:
+            self.slice_value_label.configure(text=f"{int(value)}")
         self.update_display()
     
     def update_threshold(self, value):
         """Update the prediction threshold."""
         self.app.threshold = float(value)
+        self.threshold_var.set(float(value))
+        # Update the threshold value label
+        if self.threshold_value_label:
+            self.threshold_value_label.configure(text=f"{float(value):.2f}")
         self.update_display()
     
     def update_display(self):
