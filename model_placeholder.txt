@@ -4,8 +4,6 @@ This directory should contain the trained model file `model_x1_1.h5`.
 
 ## Download Instructions
 
-Due to file size limitations, the trained model is not included in this repository. 
-
 To use this application, you need to:
 
 1. **Train your own U-Net model** using the provided notebook in `building the model/`
