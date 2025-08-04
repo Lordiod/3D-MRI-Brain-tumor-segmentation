@@ -169,6 +169,13 @@ jobs:
             echo "No Dockerfile found. Skipping Docker build steps."
           fi
           
+      - name: Set lowercase repository name
+        if: steps.dockerfile_check.outputs.dockerfile_exists == 'true'
+        id: repo_name
+        run: |
+          REPO_LOWERCASE=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "lowercase_repo=$REPO_LOWERCASE" >> $GITHUB_OUTPUT
+          
       - name: Build Docker image
         if: steps.dockerfile_check.outputs.dockerfile_exists == 'true'
         uses: docker/build-push-action@v4
@@ -186,12 +193,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Push Docker image
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        if: steps.dockerfile_check.outputs.dockerfile_exists == 'true' && github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ steps.repo_name.outputs.lowercase_repo }}:latest
           
   deploy:
     name: Deploy
