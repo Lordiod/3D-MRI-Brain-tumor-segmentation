@@ -26,8 +26,32 @@ class AppConfig:
     }
     
     # UI settings
-    WINDOW_WIDTH = 800
-    WINDOW_HEIGHT = 600
+    WINDOW_WIDTH = 1000
+    WINDOW_HEIGHT = 700
+    
+    # Professional dark theme color scheme
+    COLORS = {
+        'primary': "#3B82F6",      # Blue for primary buttons
+        'primary_dark': "#2563EB", # Darker blue for hover
+        'secondary': "#6B7280",    # Medium gray
+        'success': "#10B981",      # Green for success
+        'warning': "#F59E0B",      # Amber for warnings
+        'error': "#EF4444",        # Red for errors
+        'background': "#111827",   # Very dark background
+        'card_bg': "#1F2937",      # Dark card background
+        'text_primary': "#F9FAFB", # Light text for primary
+        'text_secondary': "#9CA3AF", # Medium gray for secondary text
+        'border': "#374151"        # Dark border color
+    }
+    
+    # Typography
+    FONTS = {
+        'heading': ("Segoe UI", 24, "bold"),
+        'subheading': ("Segoe UI", 14, "bold"),
+        'body': ("Segoe UI", 11),
+        'caption': ("Segoe UI", 10),
+        'button': ("Segoe UI", 11, "bold")
+    }
     VISUALIZATION_WIDTH = 1400
     VISUALIZATION_HEIGHT = 900
     
