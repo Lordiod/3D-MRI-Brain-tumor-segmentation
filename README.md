@@ -1,12 +1,14 @@
 # 3D MRI Brain Tumor Segmentation GUI Application
 
-![3D MRI Brain Tumor Segmentation GUI](pics/3D MRI Brain Tumor Segmentation GUI Application.gif)
+
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10%2B-orange)](https://tensorflow.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 A modern GUI application built with CustomTkinter that uses a trained U-Net deep learning model to perform automated brain tumor segmentation on NIfTI MRI data. This tool provides medical professionals and researchers with an intuitive interface for analyzing brain tumor patterns in 3D MRI scans.
+
+![3D MRI Brain Tumor Segmentation GUI](pics/app.gif)
 
 ## ✨ Features
 
