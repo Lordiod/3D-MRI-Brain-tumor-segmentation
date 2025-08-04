@@ -1,9 +1,10 @@
 # 3D MRI Brain Tumor Segmentation & Visualization
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10-orange)](https://tensorflow.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![GUI](https://img.shields.io/badge/GUI-CustomTkinter-brightgreen)](https://github.com/TomSchimansky/CustomTkinter)
+<div align="center">
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/) [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10-orange)](https://tensorflow.org/) [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![GUI](https://img.shields.io/badge/GUI-CustomTkinter-brightgreen)](https://github.com/TomSchimansky/CustomTkinter)
+
+</div>
 
 A modern GUI application for 3D MRI brain tumor segmentation using a U-Net deep learning model. This tool provides an intuitive interface for medical professionals and researchers to load, visualize, and analyze brain tumor patterns from NIfTI MRI scans.
 
