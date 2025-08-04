@@ -94,7 +94,7 @@ These visualizations help understand how each modality contributes to tumor dete
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/3d-mri-brain-tumor-segmentation.git
+    git clone https://github.com/Lordiod/3d-mri-brain-tumor-segmentation.git
     cd 3d-mri-brain-tumor-segmentation
     ```
 
