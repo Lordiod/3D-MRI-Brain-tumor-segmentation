@@ -1,6 +1,6 @@
 # 3D MRI Brain Tumor Segmentation GUI Application
 
-![Demo](pics/3D MRI Brain Tumor Segmentation GUI Application.gif)
+![3D MRI Brain Tumor Segmentation GUI](pics/3D MRI Brain Tumor Segmentation GUI Application.gif)
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10%2B-orange)](https://tensorflow.org/)
