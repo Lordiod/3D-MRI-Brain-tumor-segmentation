@@ -123,7 +123,6 @@ dmypy.json
 .pyre/
 
 # Model files (large files)
-*.h5
 *.hdf5
 *.pkl
 *.pickle
