@@ -159,7 +159,18 @@ jobs:
           path: docs/_build/html
           if-no-files-found: ignore
           
+      - name: Check if Dockerfile exists
+        id: dockerfile_check
+        run: |
+          if [ -f "Dockerfile" ]; then
+            echo "dockerfile_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "dockerfile_exists=false" >> $GITHUB_OUTPUT
+            echo "No Dockerfile found. Skipping Docker build steps."
+          fi
+          
       - name: Build Docker image
+        if: steps.dockerfile_check.outputs.dockerfile_exists == 'true'
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -167,7 +178,7 @@ jobs:
           tags: mri-brain-tumor-segmentation:latest
           
       - name: Login to GitHub Container Registry
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        if: steps.dockerfile_check.outputs.dockerfile_exists == 'true' && github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
